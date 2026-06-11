@@ -1,0 +1,1 @@
+# vitarighst-app
