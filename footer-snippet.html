@@ -1,0 +1,23 @@
+<!-- ============================================== -->
+<!-- LEGAL FOOTER SNIPPET                            -->
+<!-- Diesen Code VOR dem schließenden </body>-Tag   -->
+<!-- in jede bestehende Seite einfügen.             -->
+<!-- Ändert nichts an Struktur oder Funktion.       -->
+<!-- ============================================== -->
+<div style="background:#f0ebe2;border-top:1px solid #e0dbd0;padding:14px 20px;text-align:center;font-size:13px;color:#8a93b0;max-width:430px;margin:0 auto">
+  <a id="legal-impressum" href="#" style="color:#8a93b0;text-decoration:none;margin:0 10px">Impressum</a> · <a id="legal-datenschutz" href="#" style="color:#8a93b0;text-decoration:none;margin:0 10px">Datenschutz</a>
+</div>
+<script>
+(function(){
+  try{
+    var n=localStorage.getItem('vr_name')||'', str=localStorage.getItem('vr_street')||'',
+        city=localStorage.getItem('vr_city')||'', t=localStorage.getItem('vr_phone')||'',
+        e=localStorage.getItem('vr_email')||'';
+    var hash = n ? '#d='+encodeURIComponent(btoa(JSON.stringify({n:n,str:str,city:city,t:t,e:e}))) : '';
+    var base = window.location.href.split('?')[0].split('#')[0];
+    var dir = base.substring(0, base.lastIndexOf('/')+1);
+    document.getElementById('legal-impressum').href = dir + 'impressum.html' + hash;
+    document.getElementById('legal-datenschutz').href = dir + 'datenschutz.html' + hash;
+  }catch(ex){}
+})();
+</script>

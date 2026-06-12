@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a2744">
+<title>Impressum</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--navy:#1a2744;--beige:#f5f0e8;--text-dark:#1a2744;--text-mid:#4a5578;--gold:#c9a84c}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--beige);color:var(--text-dark);max-width:680px;margin:0 auto;padding:0}
+.header{background:var(--navy);padding:48px 24px 24px;color:white}
+.header h1{font-size:24px;font-weight:700}
+.header p{font-size:15px;opacity:.7;margin-top:6px}
+.content{padding:24px}
+h2{font-size:18px;font-weight:700;color:var(--navy);margin:24px 0 10px}
+h2:first-child{margin-top:0}
+p{font-size:15px;color:var(--text-mid);line-height:1.7;margin-bottom:10px}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.7);font-size:14px;text-decoration:none;margin-bottom:12px}
+.error-box{background:#fff3f3;border-left:4px solid #e74c3c;padding:16px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14px;color:#c0392b}
+</style>
+</head>
+<body>
+<div class="header">
+  <a class="back-link" href="javascript:history.back()">← Zurück</a>
+  <h1>Impressum</h1>
+  <p>Angaben gemäß § 5 TMG</p>
+</div>
+<div class="content">
+  <div id="imp-error" class="error-box" style="display:none">
+    ⚠️ Dieser Link enthält keine Impressumsdaten. Bitte wende dich direkt an die Person, die dir diesen Link geschickt hat.
+  </div>
+
+  <h2>Verantwortlich</h2>
+  <p id="imp-name-address">–</p>
+
+  <h2>Kontakt</h2>
+  <p id="imp-kontakt">–</p>
+
+  <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+  <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+  <p style="font-size:13px;color:#aaa;margin-top:32px">Quelle: <a href="https://www.e-recht24.de/impressum-generator.html" style="color:#aaa">e-recht24.de</a></p>
+</div>
+
+<script>
+function getParam(name){
+  try{
+    var search=window.location.search.substring(1);
+    var pairs=search.split('&');
+    for(var i=0;i<pairs.length;i++){
+      var pair=pairs[i].split('=');
+      if(decodeURIComponent(pair[0])===name) return pair[1]?decodeURIComponent(pair[1].replace(/[+]/g,' ')):'';
+    }
+  }catch(e){}
+  return '';
+}
+
+function initPage(){
+  var name='', street='', city='', phone='', email='';
+  var hash = window.location.hash.substring(1);
+  if(hash.indexOf('d=')===0){
+    try{
+      var dec = JSON.parse(atob(decodeURIComponent(hash.substring(2))));
+      name = dec.n||''; street = dec.str||''; city = dec.city||'';
+      phone = dec.t||''; email = dec.e||'';
+    }catch(e){}
+  }
+  if(!name) name = getParam('n')||'';
+  if(!street) street = getParam('str')||'';
+  if(!city) city = getParam('city')||'';
+  if(!phone) phone = getParam('t')||'';
+  if(!email) email = getParam('e')||'';
+
+  if(!name){
+    document.getElementById('imp-error').style.display='block';
+    return;
+  }
+
+  var addr = name + (street ? '<br>' + street : '') + (city ? '<br>' + city : '');
+  document.getElementById('imp-name-address').innerHTML = addr;
+
+  var kontakt = '';
+  if(phone) kontakt += 'Telefon: ' + phone + '<br>';
+  if(email) kontakt += 'E-Mail: <a href="mailto:' + email + '">' + email + '</a>';
+  if(!kontakt) kontakt = '–';
+  document.getElementById('imp-kontakt').innerHTML = kontakt;
+}
+initPage();
+</script>
+</body>
+</html>
