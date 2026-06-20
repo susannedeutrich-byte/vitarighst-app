@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Vitarights — Entdecke was möglich ist</title>
+<style>
+  :root {
+    --navy: #1E2D5A;
+    --navy-light: #2a3d7a;
+    --gold: #C9A84C;
+    --gold-light: #f5e9c8;
+    --green: #25d366;
+    --white: #ffffff;
+    --beige: #F7F4EF;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a5568;
+    --text-light: #8a95a3;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--beige);
+    color: var(--text-dark);
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--navy) 0%, #2d4a8a 60%, #1a3060 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(201,168,76,0.15);
+    border-radius: 50%;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .hero-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  /* TOGGLE */
+  .toggle-wrap {
+    display: flex;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 4px;
+    margin: 0 auto;
+    max-width: 280px;
+  }
+  .toggle-btn {
+    flex: 1;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+  }
+  .toggle-btn.active {
+    background: var(--white);
+    color: var(--navy);
+  }
+
+  /* SECTIONS */
+  .section { padding: 28px 20px 0; }
+  .section-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+
+  /* INTRO KARTE */
+  .hook-line {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+  .hook-sub {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-mid);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+  .intro-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(26,39,68,0.08);
+  }
+  .intro-card p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+  .intro-card strong { color: var(--text-dark); }
+
+  /* THEMEN-PILLS */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .pill {
+    padding: 7px 14px;
+    border-radius: 50px;
+    background: var(--gold-light);
+    color: var(--navy);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* VIDEO */
+  .video-wrap {
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(26,39,68,0.15);
+    margin-bottom: 12px;
+  }
+  .video-wrap iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+  }
+  .video-label {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* AUSSAGEN */
+  .quote-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 6px rgba(26,39,68,0.07);
+    border-left: 4px solid var(--gold);
+  }
+  .quote-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+    font-style: italic;
+  }
+  .quote-text::before { content: '„'; color: var(--gold); font-size: 20px; font-style: normal; }
+  .quote-text::after { content: '“'; color: var(--gold); font-size: 20px; font-style: normal; }
+  .quote-author {
+    margin-top: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+    font-style: normal;
+    text-align: right;
+  }
+
+  /* BRÜCKE: Problem → Erfahrungen */
+  .bridge-text {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    padding: 0 4px;
+  }
+
+  /* SCHWEBENDER WHATSAPP-BUTTON */
+  .fab-wa {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--green);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(26,39,68,0.35);
+    z-index: 100;
+  }
+  .fab-wa:active { opacity: .85; }
+
+  /* WIE FUNKTIONIERT ES */
+  .how-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 22px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(26,39,68,0.08);
+  }
+  .how-card p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-mid);
+  }
+
+  /* HIDDEN */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* DESKTOP */
+  @media (min-width: 700px) {
+    body { max-width: 700px; }
+    .section { padding: 36px 32px 0; }
+    .hero { padding: 56px 40px 48px; }
+    .hero-title { font-size: 38px; }
+    .hero-sub { font-size: 19px; }
+    .hook-line { font-size: 28px; }
+    .hook-sub { font-size: 18px; }
+    .bridge-text { font-size: 18px; }
+    .section-label { font-size: 13px; }
+    .intro-card, .how-card { padding: 28px; }
+    .intro-card p, .how-card p { font-size: 19px; }
+    .quote-card { padding: 26px; }
+    .quote-text { font-size: 18px; }
+    .quote-author { font-size: 14px; }
+    .pill { font-size: 15px; padding: 9px 16px; }
+    .video-label { font-size: 16px; padding: 14px 18px; }
+  }
+
+  /* WIDE DESKTOP: Sidebar-Layout mit fixiertem Kontaktblock */
+  @media (min-width: 1000px) {
+    body {
+      max-width: 1040px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      align-items: start;
+      gap: 0 32px;
+    }
+    .main-content { grid-column: 1; grid-row: 1; }
+    #berater-section {
+      grid-column: 2;
+      grid-row: 1;
+      position: sticky;
+      top: 24px;
+      margin: 24px 0 0 0 !important;
+    }
+    .legal-footer { grid-column: 1 / -1; grid-row: 2; }
+  }
+</style>
+</head>
+<body>
+
+<div id="inte-onboarding" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy,#1a2744);z-index:999;overflow-y:auto;padding:40px 24px">
+  <div style="max-width:400px;margin:0 auto">
+    <div style="color:white;font-size:24px;font-weight:700;margin-bottom:8px">&#127775; Deine Interessenten-Seite</div>
+    <div style="color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:28px">Trag einmalig deine Kontaktdaten ein. Dann bekommst du deinen pers&#246;nlichen Link.</div>
+    <div style="margin-bottom:14px">
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;margin-bottom:6px">Dein Name *</div>
+      <input id="ob-n" type="text" style="width:100%;padding:13px;border-radius:10px;border:none;font-size:16px;box-sizing:border-box">
+    </div>
+    <div style="margin-bottom:14px">
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;margin-bottom:6px">WhatsApp / Telefon</div>
+      <input id="ob-t" type="tel" placeholder="+49 151 ..." style="width:100%;padding:13px;border-radius:10px;border:none;font-size:16px;box-sizing:border-box">
+    </div>
+    <div style="margin-bottom:24px">
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;font-weight:600;margin-bottom:6px">E-Mail (optional)</div>
+      <input id="ob-e" type="email" style="width:100%;padding:13px;border-radius:10px;border:none;font-size:16px;box-sizing:border-box">
+    </div>
+    <button onclick="generateMyLink()" style="width:100%;padding:16px;border-radius:10px;border:none;background:white;color:#1a2744;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px">Meinen Link erstellen &#8594;</button>
+    <div id="ob-link-box" style="display:none;margin-top:16px">
+      <div style="color:rgba(255,255,255,0.8);font-size:14px;margin-bottom:8px">Dein pers&#246;nlicher Link:</div>
+      <input id="ob-link-out" type="text" readonly style="width:100%;padding:12px;border-radius:8px;border:none;background:rgba(255,255,255,0.15);color:white;font-size:13px;box-sizing:border-box;margin-bottom:10px">
+      <button onclick="copyMyLink()" style="width:100%;padding:13px;border-radius:10px;border:none;background:rgba(255,255,255,0.2);color:white;font-size:15px;font-weight:600;cursor:pointer">&#128203; Link kopieren</button>
+      <div id="ob-copy-ok" style="display:none;color:#4ade80;font-weight:600;text-align:center;margin-top:8px">&#10003; Kopiert!</div>
+      <button onclick="document.getElementById('inte-onboarding').style.display='none'" style="width:100%;padding:13px;border-radius:10px;border:1px solid rgba(255,255,255,0.3);background:none;color:white;font-size:15px;font-weight:600;cursor:pointer;margin-top:10px">Weiter zur Seite &#8594;</button>
+    </div>
+  </div>
+</div>
+
+<div class="main-content">
+<a id="fab-wa" href="#" target="_blank" class="fab-wa">&#128172;</a>
+
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Vitarights Innovations</div>
+  <div class="hero-title">Was wäre, wenn dein Körper<br><span>einfach besser funktioniert?</span></div>
+  <div class="hero-sub">Echte Erfahrungen. Persönliche Begleitung. Kein Versprechen ohne Substanz.</div>
+  <div class="toggle-wrap">
+    <button class="toggle-btn active" onclick="setView('mensch',this)">👤 Für mich</button>
+    <button class="toggle-btn" onclick="setView('tier',this)">🐾 Für mein Tier</button>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">So funktioniert's</div>
+  <div class="how-card">
+    <p>Der Beosigner® Plus arbeitet mit kohärentem Licht — einem geordneten Licht, das Zellen "verstehen" und für ihre eigene Regulation nutzen können. Bei der Anwendung wird für wenige Sekunden vitalisiert; das unterstützt, was der Körper von Natur aus kann — nämlich Eigenregulation. Das funktioniert bei Menschen genauso wie bei Tieren. Je nach Thema gibt es passende BeoKeys, die einfach eingesteckt werden.</p>
+  </div>
+</div>
+
+<!-- MENSCH -->
+<div id="view-mensch" class="view active">
+
+  <div class="section">
+    <div class="hook-line">Du fragst dich: Wann zum Teufel hört das endlich auf?</div>
+    <div class="intro-card">
+      <p>Immer müde. Immer wieder Kopfschmerzen. Allergien, Schlafprobleme, Stress — Dinge, mit denen du dich irgendwie arrangiert hast, weil es keine echte Lösung zu geben schien.</p>
+      <div class="pills">
+        <div class="pill">😴 Schlaf & Energie</div>
+        <div class="pill">🤯 Kopfschmerzen</div>
+        <div class="pill">🌿 Allergien</div>
+        <div class="pill">😰 Stress & Nerven</div>
+        <div class="pill">🦴 Gelenke & Bewegung</div>
+        <div class="pill">🧠 Konzentration</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="intro-card">
+      <p><strong>Stell dir vor:</strong> Erholter Schlaf, statt morgens schon erschöpft zu sein. Klarer Kopf, statt Kopfschmerzen, die den Tag bestimmen. Tage, an denen du nicht an die nächste Allergie-Welle denkst. Und das Gefühl, endlich weiterzukommen — statt dich gesundheitlich nur im Kreis zu drehen.</p>
+    </div>
+  </div>
+
+<div class="section">
+    <div class="bridge-text">Du bist nicht allein damit — hier erzählen andere von ihrem Weg:</div>
+    <div class="section-label">Anwenderstimmen</div>
+    <div class="quote-card">
+      <div class="quote-text">Mit dem Beosigner Plus und dem BeoKey Joy habe ich seit einigen Wochen keine Panikattacken mehr. Ich konnte nicht mehr Auto fahren. Es hat mein Leben massiv beeinflusst. Jetzt habe ich endlich wieder ein Stück Lebensqualität zurück!</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Mich hat viele Monate ein Erschöpfungszustand, einhergehend mit starkem Schwindel, ernsthaft geplagt. Seit sechs Wochen vitalisiere ich mich zweimal am Tag für jeweils nur 30 Sekunden. Tatsächlich fühle ich mich wieder gut und habe auch keinen Schwindel mehr.</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Ich habe starke Neurodermitis. Seit ich den Beosigner Plus verwende, hatte ich keinen einzigen Schub mehr. Der Juckreiz ist komplett weg. Ich kann endlich wieder richtig durchschlafen.</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Früher hatte ich jährlich ca. 4x eine Erkältung. Mit dem Beosigner Plus bin ich komplett ohne Erkältungssymptome — gerade jetzt in der Zeit, wo es um jede Ecke schnupft und hustet.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Sieh selbst</div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1174418837?h=bc245f4c7b&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">&#9654; Beosigner&#174; Plus</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1174455172?h=f618073272&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">&#9654; ViSponder&#174; Plus</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1174430553?h=cd71f2a323&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">&#9654; FREEONIC&#174; me</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1174438879?h=7f146a086e&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">&#9654; Luxood&#174; Plus</div>
+    </div>
+  </div>
+
+  
+
+
+  <div class="section">
+    <div class="section-label">Noch mehr Erfahrungen</div>
+    <a href="https://t.me/+bhataSN7o7YxZmFi" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--navy);color:white;border-radius:12px;padding:14px 18px;text-decoration:none;font-weight:600;font-size:15px">
+      <span style="font-size:20px">&#128172;</span> Erfahrungen &#8594; Telegram
+    </a>
+  </div>
+</div>
+
+<!-- TIER -->
+<div id="view-tier" class="view">
+
+  <div class="section">
+    <div class="bridge-text">Genau wie beim Menschen — nur für deinen Liebling. Viele Halter schätzen es, dabei mehr Eigenverantwortung für das Wohlbefinden ihres Tieres übernehmen zu können.</div>
+  </div>
+
+  <div class="section">
+    <div class="hook-line">Tierarztfrust statt Freizeitlust?</div>
+    <div class="hook-sub">Wenn Sorgen statt Freude am Tier überwiegen, brauchst du Lösungen!</div>
+    <div class="intro-card">
+      <p>Dein Tier kratzt sich ständig. Hat Probleme mit den Gelenken. Wird älter, und du merkst, wie die Lebensfreude nachlässt. Chronische Ohrentzündungen, Verdauungsprobleme, Ängste — du hast schon viel versucht.</p>
+      <div class="pills">
+        <div class="pill">🐾 Juckreiz & Allergien</div>
+        <div class="pill">🦴 Gelenke & Bewegung</div>
+        <div class="pill">👂 Ohrentzündungen</div>
+        <div class="pill">😰 Angst & Stress</div>
+        <div class="pill">🍽️ Verdauung</div>
+        <div class="pill">✨ Vitalität im Alter</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="intro-card">
+      <p><strong>Stell dir vor:</strong> Entspannte Spaziergänge, statt sorgenvoller Gedanken. Ruhige Nächte für euch beide, statt ständigem Kratzen und Knabbern. Ein Tier, das wieder Lust auf Bewegung hat. Und für dich: Zeit für gemeinsame Momente — statt stundenlangem Suchen im Internet nach der nächsten Lösung.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="bridge-text">Du bist nicht allein damit — auch andere Tierhalter haben einen Weg für sich und ihr Tier gefunden:</div>
+    <div class="section-label">Anwenderstimmen</div>
+    <div class="quote-card">
+      <div class="quote-text">Unsere Katze hatte altersbedingt Laufschwierigkeiten. Mit dem Beosigner Plus und dem Animal Key im Einsatz beginnt sie sogar wieder zu spielen und kleine Höhenunterschiede zu bewältigen. Wir sind so dankbar, dass wir noch eine gute weitere Zeit mit ihr verbringen dürfen.</div>
+    </div>
+    
+    <div class="quote-card">
+      <div class="quote-text">Bei einem Pferd mit schwerer Arthrose konnte der Beosigner® Plus zusammen mit dem Animal Key Plus eine erstaunliche Verbesserung bewirken.</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Mein Pferd war beim Ausreiten immer extrem schreckhaft, manchmal regelrecht panisch. Dadurch war ich selbst auch sehr gestresst. Der Beosigner® Plus mit dem Stability Key Plus hat mich selbst deutlich entspannt — und auch mein Pferd ist deutlich ruhiger geworden. So macht der Ausritt endlich Spaß.</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Unsere Hündin hatte starke Probleme mit Juckreiz und immer wieder Durchfall. Wir haben schon mindestens 2 Jahre alles Mögliche probiert — Schulmedizin, Homöopathie, Kräuter. Nichts hat wirklich geholfen. Seit wir den Beosigner® Plus nutzen, geht es unserer Kleinen so viel besser! Es ist unglaublich!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Sieh selbst</div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1123895760?title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">🐕 Hüftprobleme beim Hund — Anwendung mit dem Beosigner</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1050468600?h=e3e8078022&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">🐕 Ältere Hunde — mehr Lebensqualität im Alter</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Sieh selbst — beim Pferd</div>
+    <div class="video-wrap">
+      <iframe src="https://player.vimeo.com/video/1069339049?h=e03dfd132f&title=0&byline=0&portrait=0" allowfullscreen loading="lazy"></iframe>
+      <div class="video-label">🐴 Pferd — Allergie mit dem Beosigner</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Weitere Erfahrungsberichte</div>
+    <div class="quote-card">
+      <div class="quote-text">Mein Hund war beim Autofahren immer sehr unruhig. Hecheln, Fiepen &mdash; l&#228;ngere Fahrten waren f&#252;r alle sehr anstrengend. Seit wir den Freeonic me an seinem Geschirr befestigen ist er beim Autofahren ganz ruhig. Mir war nicht klar, dass ihn die Elektronik im Auto so gestresst hat.</div>
+      <div class="quote-author">FREEONIC&#174; me &mdash; Hundehalterin</div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">Mein Pferd hat einen ViSponder Flexibility am Reithalfter. Seitdem ist der Galopp viel lockerer und er tritt besser unter. Erstaunlich!</div>
+      <div class="quote-author">ViSponder&#174; Flexibility &mdash; Reiterin</div>
+    </div>
+  </div>
+
+<div class="section">
+    <div class="section-label">Noch mehr Erfahrungen</div>
+    <a href="https://t.me/+J2imJr80Wzo5YTZi" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--navy);color:white;border-radius:12px;padding:14px 18px;text-decoration:none;font-weight:600;font-size:15px">
+      <span style="font-size:20px">&#128172;</span> Erfahrungen &#8594; Telegram
+    </a>
+  </div>
+</div>
+<div style="text-align:center;font-size:13px;color:#8a93b0;line-height:1.6;padding:12px 20px 0;max-width:430px;margin:0 auto">Der Beosigner&#174; Plus unterstützt die körpereigene Selbstregulation &mdash; er diagnostiziert oder heilt nicht.</div>
+</div>
+
+<div id="berater-section" style="display:none;background:var(--navy);border-radius:16px;padding:28px 20px;margin:24px 20px 28px;text-align:center">
+  <div id="b-avatar" style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:white;margin:0 auto 12px"></div>
+  <div id="b-name" style="color:white;font-size:19px;font-weight:700;margin-bottom:4px"></div>
+  <div style="color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:16px">Dein Vitarights Berater</div>
+  <div style="color:rgba(255,255,255,0.8);font-size:15px;line-height:1.6;margin-bottom:18px">Wenn du jetzt neugierig geworden bist, freu ich mich auf deine Fragen &#8212; ganz unverbindlich und entspannt &#128522;</div>
+  <div id="b-wa-row" style="display:none;margin-bottom:8px">
+    <a id="b-wa-link" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:white;border-radius:10px;padding:14px;text-decoration:none;font-weight:700;font-size:16px">&#128172; WhatsApp schreiben</a>
+  </div>
+  <div id="b-email-row" style="display:none">
+    <a id="b-email-link" href="#" style="display:flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.1);color:white;border-radius:10px;padding:13px;text-decoration:none;font-weight:600;font-size:15px">&#9993;&#65039; E-Mail schreiben</a>
+  </div>
+  <div id="status-hint" style="display:none;margin-top:14px;background:rgba(255,255,255,0.08);border-radius:12px;padding:16px 18px;color:rgba(255,255,255,0.92);font-size:14px;line-height:1.6;text-align:left">
+    <b style="font-size:15px;color:#ffffff">&#128241; Magst du erstmal nur reinschnuppern?</b> Kleiner Tipp: Speicher dir meine Nummer ab &#8212; nur dann zeigt dir WhatsApp meinen Status, und du verpasst nichts. Dort teile ich hilfreiche und n&#252;tzliche Infos, <b>gratis Webinar-Einladungen</b> und den Zugang zu meiner Gesundheits-Gruppe.
+    <a id="vcard-link" href="#" download="kontakt.vcf" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;background:rgba(255,255,255,0.15);color:white;border-radius:10px;padding:12px;text-decoration:none;font-weight:700;font-size:14px">&#128199; Kontakt speichern</a>
+  </div>
+</div>
+
+<script>
+function setView(v, btn) {
+  document.querySelectorAll('.view').forEach(function(el){el.classList.remove('active');});
+  document.getElementById('view-'+v).classList.add('active');
+  document.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+}
+
+function makeWaLink(phone, name) {
+  if(!phone) return '#';
+  var clean = phone.replace(/[^0-9+]/g,'');
+  if(clean.startsWith('+')){}
+  else if(clean.startsWith('00')) clean = '+' + clean.substring(2);
+  else if(clean.startsWith('0')) clean = '+49' + clean.substring(1);
+  var num = clean.replace('+','');
+  var msg = encodeURIComponent('Hallo ' + (name||'') + ', ich habe mir deine Seite angeschaut und möchte gerne mehr erfahren 😊');
+  return 'https://wa.me/' + num + '?text=' + msg;
+}
+
+function makeVCard(name, phone) {
+  var clean = phone.replace(/[^0-9+]/g,'');
+  if(clean.startsWith('+')){}
+  else if(clean.startsWith('00')) clean = '+' + clean.substring(2);
+  else if(clean.startsWith('0')) clean = '+49' + clean.substring(1);
+  var vcard = 'BEGIN:VCARD\r\nVERSION:3.0\r\nFN:' + name + '\r\nTEL;TYPE=CELL:' + clean + '\r\nEND:VCARD\r\n';
+  return 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
+}
+
+function generateMyLink(){
+  var n=document.getElementById('ob-n').value.trim();
+  var t=document.getElementById('ob-t').value.trim();
+  var e=document.getElementById('ob-e').value.trim();
+  if(!n){alert('Bitte deinen Namen eintragen.');return;}
+  var data={n:n,t:t,e:e};
+  var d=btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  var base=window.location.href.split('#')[0].split('?')[0];
+  var link=base+'#d='+d;
+  document.getElementById('ob-link-out').value=link;
+  document.getElementById('ob-link-box').style.display='block';
+  copyMyLink();
+}
+function copyMyLink(){
+  var link=document.getElementById('ob-link-out').value;
+  try{if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(link);}}catch(ex){}
+  var ta=document.createElement('textarea');ta.value=link;ta.style.position='fixed';ta.style.left='-9999px';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');}catch(ex){}
+  document.body.removeChild(ta);
+  var ok=document.getElementById('ob-copy-ok');
+  if(ok){ok.style.display='block';setTimeout(function(){ok.style.display='none';},3000);}
+}
+
+function initPage() {
+  try {
+    // Hash #d= lesen
+    var bname='', bphone='', bemail='';
+    var hash=window.location.hash.substring(1);
+    if(hash.indexOf('d=')===0){
+      try{
+        var dec=JSON.parse(atob(decodeURIComponent(hash.substring(2))));
+        bname=dec.n||''; bphone=dec.t||''; bemail=dec.e||'';
+      }catch(ex){}
+    }
+    if(bname){
+      var firstName=bname.trim().split(' ')[0];
+
+      // Berater-Bereich am Ende befüllen
+      var bs=document.getElementById('berater-section');
+      if(bs)bs.style.display='block';
+      var bn=document.getElementById('b-name');
+      if(bn)bn.textContent=bname;
+      var av=document.getElementById('b-avatar');
+      if(av){var pts=bname.trim().split(' ');av.textContent=pts.map(function(w){return w[0]||'';}).join('').substring(0,2).toUpperCase();}
+      if(bphone){
+        var waRow=document.getElementById('b-wa-row');
+        var waLink=document.getElementById('b-wa-link');
+        if(waRow)waRow.style.display='block';
+        if(waLink)waLink.href=makeWaLink(bphone, firstName);
+        var fab=document.getElementById('fab-wa');
+        if(fab){fab.style.display='flex';fab.href=makeWaLink(bphone, firstName);}
+        var statusHint=document.getElementById('status-hint');
+        if(statusHint)statusHint.style.display='block';
+        var vcard=document.getElementById('vcard-link');
+        if(vcard){vcard.href=makeVCard(bname, bphone);vcard.download=bname.replace(/\s+/g,'-')+'.vcf';}
+      }
+      if(bemail){
+        var eRow=document.getElementById('b-email-row');
+        var eLink=document.getElementById('b-email-link');
+        if(eRow)eRow.style.display='block';
+        if(eLink)eLink.href='mailto:'+bemail;
+      }
+    } else {
+      // Kein Hash → Onboarding zeigen
+      var ob=document.getElementById('inte-onboarding');
+      if(ob)ob.style.display='block';
+    }
+  } catch(e) {}
+}
+
+initPage();
+</script>
+
+<div class="legal-footer" style="background:#f0ebe2;border-top:1px solid #e0dbd0;padding:14px 20px;text-align:center;font-size:13px;color:#8a93b0;max-width:430px;margin:0 auto"><a id="legal-impressum" href="impressum.html" style="color:#8a93b0;text-decoration:none;margin:0 10px">Impressum</a> &middot; <a id="legal-datenschutz" href="datenschutz.html" style="color:#8a93b0;text-decoration:none;margin:0 10px">Datenschutz</a></div>
+<script>
+(function(){
+  function setupLegalLinks(){
+    try{
+      var n=localStorage.getItem("vr_name")||"", str=localStorage.getItem("vr_street")||"",
+          city=localStorage.getItem("vr_city")||"", t=localStorage.getItem("vr_phone")||"",
+          e=localStorage.getItem("vr_email")||"";
+      var hash = n ? "#d="+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify({n:n,str:str,city:city,t:t,e:e}))))) : "";
+      var base = window.location.href.split("?")[0].split("#")[0];
+      var dir = base.substring(0, base.lastIndexOf("/")+1);
+      var impEl = document.getElementById("legal-impressum");
+      var dsEl = document.getElementById("legal-datenschutz");
+      if(impEl) impEl.setAttribute("href", dir + "impressum.html" + hash);
+      if(dsEl) dsEl.setAttribute("href", dir + "datenschutz.html" + hash);
+    }catch(ex){}
+  }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", setupLegalLinks);
+  } else {
+    setupLegalLinks();
+  }
+})();
+</script>
+</body>
+</html>
